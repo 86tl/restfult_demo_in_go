@@ -21,15 +21,15 @@ type Person struct {
 }
 
 type User struct {
-	Id  int64
-	Name string
-	Type  string
+	Id  int64   `json:"id"`
+	Name string   `json:"name"`
+	Type  string    `json:"type"`
 }
 
 type Relationship struct {
-	Id  string
-	State string
-	Type  string
+	Id  string    `json:"id"`
+	State string   `json:"state"`
+	Type  string   `json:"type"`
 }
 
 type State struct {

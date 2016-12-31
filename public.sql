@@ -11,16 +11,27 @@ Target Server Type    : PGSQL
 Target Server Version : 90405
 File Encoding         : 65001
 
-Date: 2015-12-31 17:58:28
+Date: 2016-01-03 12:48:10
 */
 
+
+-- ----------------------------
+-- Sequence structure for "public"."relations_id_seq"
+-- ----------------------------
+DROP SEQUENCE "public"."relations_id_seq";
+CREATE SEQUENCE "public"."relations_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 17
+ CACHE 1;
 
 -- ----------------------------
 -- Table structure for "public"."relations"
 -- ----------------------------
 DROP TABLE "public"."relations";
 CREATE TABLE "public"."relations" (
-"id" int8 NOT NULL,
+"id" int4 DEFAULT nextval('relations_id_seq'::regclass) NOT NULL,
 "user_id" int8,
 "target_id" int8,
 "state" varchar,
@@ -33,14 +44,11 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of relations
 -- ----------------------------
-INSERT INTO "public"."relations" VALUES ('1', '1', '2', 'liked', 'relationship');
-INSERT INTO "public"."relations" VALUES ('2', '1', '3', 'matched', 'relationship');
-INSERT INTO "public"."relations" VALUES ('3', '1', '4', 'disliked', 'relationship');
-INSERT INTO "public"."relations" VALUES ('4', '3', '1', 'unliked', 'relationship');
-INSERT INTO "public"."relations" VALUES ('5', '2', '3', 'disliked', 'relationship');
-INSERT INTO "public"."relations" VALUES ('6', '3', '2', 'liked', 'relationship');
-INSERT INTO "public"."relations" VALUES ('7', '1', '9', 'matched', 'relationship');
-INSERT INTO "public"."relations" VALUES ('7', '9', '1', 'liked', 'relationship');
+INSERT INTO "public"."relations" VALUES ('13', '9', '1', 'liked', 'relationship');
+INSERT INTO "public"."relations" VALUES ('14', '1', '9', 'matched', 'relationship');
+INSERT INTO "public"."relations" VALUES ('15', '3', '1', 'liked', 'relationship');
+INSERT INTO "public"."relations" VALUES ('16', '1', '3', 'disliked', 'relationship');
+INSERT INTO "public"."relations" VALUES ('17', '2', '3', 'disliked', 'relationship');
 
 -- ----------------------------
 -- Table structure for "public"."user"
@@ -66,6 +74,12 @@ INSERT INTO "public"."user" VALUES ('4', 'Henry', 'user');
 -- ----------------------------
 -- Alter Sequences Owned By 
 -- ----------------------------
+ALTER SEQUENCE "public"."relations_id_seq" OWNED BY "relations"."id";
+
+-- ----------------------------
+-- Primary Key structure for table "public"."relations"
+-- ----------------------------
+ALTER TABLE "public"."relations" ADD PRIMARY KEY ("id");
 
 -- ----------------------------
 -- Primary Key structure for table "public"."user"

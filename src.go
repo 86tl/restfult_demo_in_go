@@ -151,7 +151,7 @@ func UpdateRelationship(db *pg.DB,id string, target_id string , state string )(*
 
 func CreateRelationship(db *pg.DB,id string, target_id string , state string )(*Relationship,error){
 	var rela Relationship
-	_, err := db.QueryOne(&rela,`insert into "public".relations  VALUES('7',?,?,?,'relationship')RETURNING id`,  target_id, id, state)
+	_, err := db.QueryOne(&rela,`insert into "public".relations ("user_id","target_id","state","type")  VALUES(?,?,?,'relationship')RETURNING id`,  target_id, id, state)
 	return &rela,err
 }
 
